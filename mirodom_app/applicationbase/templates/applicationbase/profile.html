@@ -1,0 +1,60 @@
+{% extends "layout/basic.html" %}
+
+{% block title %} Профиль пользователя {% endblock %}
+{% load thumbnail %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<h2> Профиль пользователя {{ user.username }} </h2>
+{% if user.first_name and user.last_name %}
+<p>Здравствйте, {{user.first_name}} {{user.last_name}}!</p>
+{% else %}
+<p> Здравствуйте! </p>
+{% endif %}
+<h3> Ваши заявки </h3>
+<h2 class="mb-2">{{master}}</h2>
+<div class="container-fluid mb-2">
+    <div class="row">
+        <div class="col">&nbsp;</div>
+
+
+    </div>
+</div>
+{% if applications %}
+<ul class="list-unstyled">
+    {% for application in applications %}
+    <li class="media my+15 p+13 border">
+        {% url 'applicationbase:detail' master_pk=master.pk pk=application.pk as url %}
+        <a href="{{url}}{{all}}">
+            <h3>{{application.address}}</h3>
+            {% if application.img_door_closer %}
+            <img class="mr+3" src="{% thumbnail application.img_door_closer 'default' %}">
+               {% endif %}
+        </a>
+
+
+        <div class="media-body">
+            <h3><a href="{{url}}{{all}}">
+                {{application.city}}
+            </a></h3>
+            <div>{{applcation.reason_for_calling}}</div>
+            <p class="text-right font-weight-bold">{{application.address}} {{application.flat}}</p>
+            <p class="text-right font-italic">{{application.published}}</p>
+            <p> <a href="{% url 'applicationbase:profile_app_change' pk=application.pk %}">
+            Изменить
+        </a>
+           <a href="{% url 'applicationbase:profile_app_delete' pk=application.pk %}">
+            Удалить
+        </a>
+        </p>
+        </div>
+    </li>
+    {% endfor %}
+
+</ul>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "layout/basic.html" %}
+{% block content %}
+{% for application in applications %}
+<div>
+     {% url 'applicationbase:detail' master_pk=application.master.pk pk=application.pk as url %}
+        <a href="{{url}}{{all}}">
+    <h2>{{application.master.full_name}}</h2>
+    <p>{{application.city}}</p>
+    <p>{{application.address}}</p>
+    <p>{{application.published}}</p>
+        </a>
+</div>
+{% endfor %}
+{% endblock %}

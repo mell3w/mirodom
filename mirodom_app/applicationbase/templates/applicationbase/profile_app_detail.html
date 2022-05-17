@@ -1,0 +1,30 @@
+{% extends "layout/basic.html" %}
+
+{% block title %} {{application.master}} - {{application.address}} {% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        {% if application.img_door_closer %}
+        <div class="col-md-auto"><img src="{{application.img_door_closer.url}}" class="main-image"></div>
+        {% endif %}
+        <div class="col">
+            <h2>{{application.master}}</h2>
+            <h3>{{application.address}}{{application.flat}}</h3>
+            <p>{{application.img_door_closer}}</p>
+            <p class="font-weight-bold">{{application.sum}}</p>
+            <p class="text-right font-italic">{{application.published}}</p>
+        </div>
+    </div>
+</div>
+{% if ais %}
+<div class="d-flex justify-content-between flex-wrap mt-5">
+    {% for ai in ais %}
+    <div>
+        <img src="{{ai.image.url}}" class="additional-image">
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<p><a href="{% url 'applicationbase:by_master' master_id=application.master.pk %}{{all}}">к заявкам {{application.master.full_name}}</a></p>
+{% endblock %}

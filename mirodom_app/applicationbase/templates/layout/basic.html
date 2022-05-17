@@ -1,0 +1,64 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initital-scale=1, shrink-to-fit=no">
+
+    <title> {% block title  %}Главная {% endblock %}:: Все заявки</title>
+
+    {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'applicationbase/style.css'%}">
+    {% bootstrap_javascript jquery='slim' %}
+</head>
+<body class="container-fluid">
+<header class="mb-4">
+<h1 class="display-1 text-center">Заявки</h1>
+</header>
+<div class="row">
+    <ul class="col nav justify-content-end border">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'applicationbase:register' %}">Регистрация</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href=""
+            role="button" aria-haspopup="true" aria-expanded="false">Профиль</a>
+
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'applicationbase:profile'  %}">Мои заявки</a>
+            <a class="dropdown-item" href="{% url 'applicationbase:profile_change' %}">Изменить личные данные</a>
+            <a class="dropdown-item" href="{% url 'applicationbase:password_change' %}">Изменить пароль</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'applicationbase:logout' %}">Выйти</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'applicationbase:profile_delete' %}">Удалить</a>
+        </div>
+         </li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'applicationbase:login' %}">Вход</a></li>
+        {% endif %}
+    </ul>
+</div>
+<div class="row"></div>
+<nav class="col-md-auto nav flex-column border">
+
+
+    <a class="nav-link root" href="{% url 'applicationbase:index'%}">Все заявки</a>
+    <a class="nav-link" href="{% url 'applicationbase:profile_app_add' %}">Создать заявку</a>
+    <span class="nav-link root font-weight-bold">Мастера</span>
+    {% for master in masters %}
+    <a class="nav-link" href="{% url 'applicationbase:by_master' master.pk %}">{{master.full_name}}</a>
+    {% endfor %}
+</nav>
+<section class="col border py-2">
+  {% block content %}
+  {% endblock %}
+</section>
+<footer class="mt-3">
+    <p class="text-right font-italic">МИРОДОМ</p>
+</footer>
+</body>
+</html>

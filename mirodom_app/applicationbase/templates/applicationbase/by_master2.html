@@ -1,0 +1,13 @@
+{% extends "layout/basic.html" %}
+{% block title %}{{current_master.full_name}}{%endblock%}
+{% block content %}
+<h2>Мастер :: {{current_master.full_name}}</h2>
+{% for application in applications %}
+<div>
+    <h2>{{application.master.full_name}}</h2>
+    <p>{{application.city}}</p>
+    <p>{{application.address}}</p>
+    <p>{{application.published}}</p>
+</div>
+{% endfor %}
+{% endblock %}
