@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-p!*2l#=61c!_h&$fo)i$k8+!!m3y-3&aqvx1(so6-j(1!@)2$o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-EMAIL_PORT = 1025
+#EMAIL_PORT = 1025
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mirodomgroup@gmail.com'
+EMAIL_HOST_PASSWORD = 'mirodom60300603'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 ALLOWED_HOSTS = []
 
@@ -151,3 +156,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #CORS_ORIGIN_ALLOW_ALL = True
 #CORS_URLS_REGEX = r'^/api/.*$'
+
+#SECURE_SSL_REDIRECT = True

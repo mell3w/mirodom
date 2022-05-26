@@ -10,14 +10,49 @@
         <div class="col-md-auto"><img src="{{application.img_door_closer.url}}" class="main-image"></div>
         {% endif %}
         <div class="col">
-            <h2>{{application.master}}</h2>
-            <h3>{{application.address}}{{application.flat}}</h3>
-            <p>{{application.img_door_closer}}</p>
-            <p class="font-weight-bold">{{application.sum}}</p>
-            <p class="text-right font-italic">{{application.published}}</p>
+            <h2>Мастер: {{application.master}}</h2>
+            <h3>Город: {{application.city}}</h3>
+            <h3>Адрес: {{application.address}} {{application.flat}}</h3>
+            <h4>Автор заявки: {{application.author}}</h4>
+            <h4>ФИО клиента: {{application.full_name_client}}</h4>
+             <h4>Причины вызова: {{application.reason_for_calling}}</h4>
+
+            {% if application.treaty %}
+            <p>Есть договор</p>
+            {% endif %}
+            {% if application.door_closer %}
+            <h3>Нужна замена доводчика</h3>
+            {% endif %}
+            {% if application.monetary %}
+            <h3>Денежная заявка</h3>
+            {% endif %}
+
+            <h4>Общая сумма: {{application.sum}}</h4>
+            <h4>Премия: {{application.premium}}</h4>
+            {% if application.fine %}
+            <h3>Штраф: {{application.choose_fine}}</h3>
+            {% endif %}
+
+            <h4>Комментарии: {{application.comment}}</h4>
+            <h4>Статус заявки: {{application.status}}</h4>
+            <h4>Дата закарытия заявки: {{application.closing_date}}</h4>
+            {% if application.calculated %}
+            <h3>Деньги сданы</h3>
+            {% endif %}
+
+            <p class="">
+            <a href="{% url 'applicationbase:profile_app_change' pk=application.pk %}"> Изменить</a>
+            </p>
+            <p class="">
+            <a href="{% url 'applicationbase:profile_app_delete' pk=application.pk %}"> Удалить</a>
+            </p>
+
+
+            <p class="text-right font-italic">Дата подачи заявки: {{application.published}}</p>
         </div>
     </div>
 </div>
+
 {% if ais %}
 <div class="d-flex justify-content-between flex-wrap mt-5">
     {% for ai in ais %}
